@@ -61,25 +61,22 @@ colorscale: Matplotlib colormap name. See https://matplotlib.org/stable/tutorial
 color_model: Color for the model vectors (secondary). 
 color_obs: Color for the observational vectors (primary).
 recenter: Input parameters for the recenter function -  gc.recenter(x=recenter[0], y=recenter[1], width=recenter[2], height=recenter[3]). See https://aplpy.readthedocs.io/en/stable/api/aplpy.FITSFigure.html#aplpy.FITSFigure.recenter
+figsize: Figure size. See https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html
+colorbar_label: String. Label for the colorbar of the background intensity array. 
 
 
+### create_radial_mask(xsize, ysize, q=1, theta=0, center=None, radius=None)
+This function generates an array where each pixel contains its own radius, defined from the center as defined in the input. The dimensions of the array are defined in xsize and ysize. q is minor/major axis ratio of the ellipses (to take into account the inclination of the galaxy), theta is the position angle of the major axis, measured as counter-clock wise from the North direction.
 
+### create_angle_mask(xsize, ysize, q, theta, center=None, radius=None, pitch=90):
+This function generates an array where each pixel contains the position angle of an spiral polarization field array with pitch angle equal as the input. pitch=90 generates a radial field, with vectors pointing outwards from the center. pitch=0 generates a pure azimuthal field, taking into account the position angle and ellipticity of the disk. The dimensions of the array are defined in xsize and ysize. q is minor/major axis ratio of the ellipses (to take into account the inclination of the galaxy), theta is the position angle of the major axis, measured as counter-clock wise from the North direction.
 
+### bootstrap_resample(X, weights=False, seed=None):
+This function generates a random resampling with replacement (see https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) with weights as defined in the input. Seed is the random generation python seed, useful for parallel processing.  
 
+### median_angle(input_sample):
+This function calculates 
 
-
-
-
-
-
-                     
-def create_radial_mask(xsize, ysize, q=1, theta=0, center=None, radius=None):
-
-def create_angle_mask(xsize, ysize, q, theta, center=None, radius=None, pitch=90):
-
-def bootstrap_resample(X, weights=False, seed=None):
-
-def median_angle(input_sample):
 
 def bootmedian_angles(input_sample, nsimul, weights=False):
 
