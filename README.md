@@ -105,19 +105,92 @@ This function generates an array where each pixel contains the position angle of
 This function generates a random resampling with replacement (see https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) with weights as defined in the input. Seed is the random generation python seed, useful for parallel processing.  
 
 ### median_angle(input_sample):
-This function calculates 
+This function calculates the median of a sample of angles that are defined periodic between (-90, +90) degrees. 
 
+input: An array with a sample of angles
+output: pi periodic median of the input sample
 
 ### bootmedian_angles(input_sample, nsimul, weights=False):
+Bootstrapping version of the median_angle function. This function calculates the median of a sample of angles that are defined periodic between (-90, +90) degrees. 
+
+input: An array with a sample of angles
+output: pi periodic median of the input sample
 
 
 ### rotated_polarization_angle(U, Q):
+This function calculates the 90º rotated polarization angle (B-field) from the two Stokes arrays (U,Q). 
 
 
 ### inv_rotated_polarization_angle(pol90):
+This function calculates the two Stokes arrays (U,Q) from the 90º rotated polarization angle (B-field).  
 
 
-### single_magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, pol_level, dpol_level, PA, dPA, incl, dincl, nbins, nsimul, save_temp=False, SNR_int_limit=5, SNR_pol_limit=1, plot_verbose=False, name="default_", header=None, bin_limits=None):
-          
-          
-### magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, PA, dPA, incl, dincl, nsimul=100, nbins=10, plot_verbose=False, SNR_int_limit=5, SNR_pol_limit=1, name="default_", header=None, bin_limits=None, save_temp=False, force_bootmedian=False):
+### magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, PA, dPA, incl, dincl, nsimul=100, nbins=10, plot_verbose=False, SNR_int_limit=5, SNR_pol_limit=1, name="default_", header=None, bin_limits=None, save_temp=False, force_bootmedian=False)
+
+Magnetic_pitch_angle: A wrapper-function to single_magnetic_pitch_angle. 
+
+Input: (see  single_magnetic_pitch_angle) 
+
+Output: 
+- Files: 
+1 - name + "pitch_model.fits" : This file contains an array with the same shape than the input I,Q,U, that contains the pitch angle for every pixel, according to the median azimuthal model generated from the pitch angle profile.
+2 - name + "profile.csv": This file contains a Pandas dataframe with the following columns: 
+      - R, R_s1up, R_s1down, R_s2up, R_s2down: Radius of the bin, plus 1sigma and 2sigma upper and lower limits of its probability distribution.  
+       - pitch, pitch_s1up, pitch_s1down, pitch_s2up, pitch_s2down. Median pitch angle of the radial bin, plus 1sigma and 2sigma upper and lower limits of its probability distribution.
+       
+3 - name + "pitch_angle_cube.fits": This fits file contains two datacubes. In the first extension, it contains a datacube with the same (x, y) dimensions than the input I,Q,U frames, and with a z dimension as large as nsimul. This datacube represents the variation of the 2 dimensional distribution of the pitch angle with the uncertainty of the input parameters. In the second dimension, it contains the Montecarlo simulations of the radial mask with the uncertainty in PA and incl. 
+
+- Command line: 
+A two element list that contains:
+1 - The profile pandas dataframe (same as name + "profile.csv")
+2 - pitch_angle_cube (same as name + "pitch_angle_cube.fits")
+   
+    
+    return([median_curve, np.median(pitch_angle_cube, axis=0)])
+
+### single_magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, pol_level, dpol_level, PA, dPA, incl, dincl, nbins, nsimul, save_temp=False, SNR_int_limit=5, SNR_pol_limit=1, plot_verbose=False, name="default_", header=None, bin_limits=None, force_bootmedian=False):
+ 
+Objective: Calculate the magnetic pitch angle of a galaxy observed at position angle, PA and inclination incl, using a set of arrays containing the Stokes parameters (I, Q, U).  
+
+Input: 
+
+- Center of the galaxy in pixels (xcen, ycen)
+
+- Total intensity + Uncertainty (I, dI)
+
+- Stokes Q + Uncertainty (Q, dQ)
+
+- Stokes U + Uncertainty (U, dU). 
+
+- pol_level: Debiased polarization % array
+
+- dpol_level: Debiased polarization % uncertainty 
+
+- PA: Position angle (degrees)
+
+- dPA: Uncertainty in position angle (degrees)
+
+- incl: Inclination angle (degrees, 0: face-on, 90: edge-on)
+
+- dincl: Uncertainty in inclination angle (degrees)
+
+- nbins: Number of radial bins for the pitch angle profile (pixels)
+
+- nsimul: Number of MonteCarlo simulations for the analysis
+
+- save_temp: Bool flag - True if you want to save the temporary files. 
+
+- SNR_int_limit: Minimum limit for the signal to noise ratio in intensity. 
+
+- SNR_pol_limit: Minimum limit for the signal to noise ratio in polarization. 
+
+- plot_verbose: True if you want to see some extra plots. 
+
+- name: String, name for the output files header.
+
+- bin_limits: Optional, default None: Add an array to define a user-defined limits for the radial bins. 
+
+- force_bootmedian: Optical, default: False. Force bootstrapping calculation for the median value of the pitch angle inside the radial bins. Warning, setting this parameter to True might lead to very long computation times. 
+
+
+
