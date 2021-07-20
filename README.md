@@ -38,34 +38,60 @@ output is a string, which will be used as the name of the fits file to store the
 
 ### save_fits(array, name, header=None):
 A function to save arrays in new fits files. 
+
 Array: The input array to save
+
 name: Name of the new fits file
+
 header: Header of the new fits file
 
 
 ### plot_pitch_model(I, pol_obs, pitch_model, SNR_int, SNR_pol, SNRi_cut = 10.0, SNRp_cut = 3.0, step=4, scalevec = 2.5, header=None, save_fig="plot_pitch_model.pdf", vmin=None, vmax=None, alpha_model=1 pol_fraction=None, title=" ", colorscale="viridis", color_model="red", color_obs="black", recenter=None, figsize=6.5, colorbar_label=r'Intensity (Jy arcsec$^{-2}$)')
                      
 This is a function to generate 2D images with the overplotted polarization vectors. 
+
 I : The intensity array for the background
+
 pol_obs: The array with the position angles to be plotted. 
+
 Pitch_model: The array with a secondary set of position angles to the plotted. 
+
 SNR_int: Signal-to-noise ratio array for the intensity
+
 SNR_pol: Signal-to-noise ratio array for the polarization
+
 SNRi_cut: Limit for the intensity Signal to noise ratio
+
 SNRp_cut: Limit for the polarization Signal to noise ratio 
-Step: Plotting density factor. If 1, all vectors are plotted. Derive a vector only from every ‘step’ pixels. You will normally want this to be >1 to get sensible vector spacing. See https://aplpy.readthedocs.io/en/stable/api/aplpy.FITSFigure.html show_vectors function. 
+
+Step: Plotting density factor. If 1, all vectors are plotted. Derive a vector only from every ‘step’ pixels. You will normally want this to be >1 to get sensible 
+
+vector spacing. See https://aplpy.readthedocs.io/en/stable/api/aplpy.FITSFigure.html show_vectors function. 
+
 header: Header of the fits files containing a valid WCS
+
 save_fig: Name of the output figure file.
+
 vmin: Minimum limit for the background intensity image color scale
+
 vmax: Maximum limit for the background intensity image color scale
+
 alpha_model: Transparency control for the secondary pitch angle model vectors
+
 pol_fraction (testing): Array containing polarization % measurements, to be used as scaling factor for the lengths of the vectors.
+
 title: (string) Title of the plot.
+
 colorscale: Matplotlib colormap name. See https://matplotlib.org/stable/tutorials/colors/colormaps.html
+
 color_model: Color for the model vectors (secondary). 
+
 color_obs: Color for the observational vectors (primary).
+
 recenter: Input parameters for the recenter function -  gc.recenter(x=recenter[0], y=recenter[1], width=recenter[2], height=recenter[3]). See https://aplpy.readthedocs.io/en/stable/api/aplpy.FITSFigure.html#aplpy.FITSFigure.recenter
+
 figsize: Figure size. See https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html
+
 colorbar_label: String. Label for the colorbar of the background intensity array. 
 
 
