@@ -108,15 +108,16 @@ This function generates a random resampling with replacement (see https://en.wik
 This function calculates 
 
 
-def bootmedian_angles(input_sample, nsimul, weights=False):
+### bootmedian_angles(input_sample, nsimul, weights=False):
 
 
-def rotated_polarization_angle(U, Q):
+### rotated_polarization_angle(U, Q):
 
-def inv_rotated_polarization_angle(pol90):
 
-def single_magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, pol_level, dpol_level, PA, dPA, incl, dincl, nbins, nsimul,
-                                save_temp=False, SNR_int_limit=5, SNR_pol_limit=1, plot_verbose=False, name="default_", header=None, bin_limits=None):
-                                
-def magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, PA, dPA, incl, dincl, nsimul=100,
-                         nbins=10, plot_verbose=False, SNR_int_limit=5, SNR_pol_limit=1, name="default_", header=None, bin_limits=None, save_temp=False, force_bootmedian=False):
+### inv_rotated_polarization_angle(pol90):
+
+
+### single_magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, pol_level, dpol_level, PA, dPA, incl, dincl, nbins, nsimul, save_temp=False, SNR_int_limit=5, SNR_pol_limit=1, plot_verbose=False, name="default_", header=None, bin_limits=None):
+          
+          
+### magnetic_pitch_angle(xcen, ycen, I, dI, Q, dQ, U, dU, PA, dPA, incl, dincl, nsimul=100, nbins=10, plot_verbose=False, SNR_int_limit=5, SNR_pol_limit=1, name="default_", header=None, bin_limits=None, save_temp=False, force_bootmedian=False):
